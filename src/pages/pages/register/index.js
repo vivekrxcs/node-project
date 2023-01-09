@@ -103,8 +103,7 @@ const RegisterPage = () => {
     console.log(authentication);
     createUserWithEmailAndPassword(authentication, email, password)
     .then((response) => {
-      // navigate('/')
-      
+      console.log(response)      
       router.push('/');
       sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
     })

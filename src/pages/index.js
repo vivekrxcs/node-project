@@ -1,12 +1,12 @@
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
-
+import { useRouter } from 'next/router'
 // ** Icons Imports
 import Poll from 'mdi-material-ui/Poll'
 import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
 import BriefcaseVariantOutline from 'mdi-material-ui/BriefcaseVariantOutline'
-
+import React, { useEffect } from 'react'
 // ** Custom Components Imports
 import CardStatisticsVerticalComponent from 'src/@core/components/card-statistics/card-stats-vertical'
 
@@ -22,7 +22,22 @@ import WeeklyOverview from 'src/views/dashboard/WeeklyOverview'
 import DepositWithdraw from 'src/views/dashboard/DepositWithdraw'
 import SalesByCountries from 'src/views/dashboard/SalesByCountries'
 
+
 const Dashboard = () => {
+  const router = useRouter()
+  useEffect(() => {
+
+    let authToken = sessionStorage.getItem('Auth Token')
+  
+    if (authToken) {
+        router.push('/');
+    }
+  
+    if (!authToken) {
+      router.push('pages/login/');
+    }
+  }, [])
+
   return (
     <ApexChartWrapper>
       <Grid container spacing={6}>

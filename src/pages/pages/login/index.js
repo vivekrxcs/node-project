@@ -4,7 +4,7 @@ import { useState } from 'react'
 // ** Next Imports
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
+import React, { useEffect } from 'react'
 // ** MUI Components
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -87,11 +87,22 @@ const LoginPage = () => {
   const handleAction = () => {
     const authentication = getAuth();
 
-    const logind= signInWithEmailAndPassword(email.value, values.password);
-    console.log(logind)    
-    //console.log(authentication)
+    signInWithEmailAndPassword(authentication,email.value, values.password)
+    .then((response) => {
+      router.push('/');
+      console.log(response)  
+      sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken)
+    })
+      
+    
   }
     
+  useEffect(() => {
+    let authToken = sessionStorage.getItem('Auth Token')
+    if (authToken) {
+      router.push('/');
+    }
+  }, [])
 
   return (
     <Box className='content-center'>
