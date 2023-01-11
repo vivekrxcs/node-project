@@ -24,15 +24,13 @@ import SalesByCountries from 'src/views/dashboard/SalesByCountries'
 
 
 const Dashboard = () => {
+  
   const router = useRouter()
   useEffect(() => {
-
-    let authToken = sessionStorage.getItem('Auth Token')
-  
+    let authToken = sessionStorage.getItem('Auth Token')  
     if (authToken) {
         router.push('/');
-    }
-  
+    }  
     if (!authToken) {
       router.push('pages/login/');
     }
